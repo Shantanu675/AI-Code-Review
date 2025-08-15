@@ -73,5 +73,35 @@ main .left .review {
 }
 
 main .left .review:hover {
-  background-color: green;
+  background-color: rgb(70, 200, 10);
+}
+
+@media (max-width: 1000px) {
+  main {
+    flex-direction: column; /* Vertical */
+  }
+
+  main .left{
+    flex-basis: 50%;
+    height: auto;
+    font:4rem;
+  }
+
+  main .left .review {
+    position: sticky;
+    bottom: 1rem;
+    right: 1rem;
+    align-self: center;
+    margin-top: auto;
+    background-color: rgb(74, 207, 17);
+    color: rgb(253, 253, 253);
+    padding: 0.2rem 1rem;
+    font-weight: 300;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 0.7rem;
+    z-index: 100;
+    font-size: medium;
+    font-weight: 500;
+  }
 }
