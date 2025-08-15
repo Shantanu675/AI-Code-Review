@@ -22,7 +22,7 @@ function App() {
 
   async function review_code() {
     try {
-      const response = await axios.post('http://localhost:3000/ai/get-review',{code})
+      const response = await axios.post('https://vercel.com/shantanu675s-projects/ai-code-review/8waCxzPpHGjFDCLUY6faKVvk4p5Y',{code})
       console.log(response.data);
       setReview(response.data);
     } catch (error) {
