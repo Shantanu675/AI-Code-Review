@@ -1,0 +1,77 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+html, 
+body,
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+main {
+  height: 100%;
+  width: 100%;
+  padding: 1.5rem; 
+  display: flex;
+  gap: 1rem;
+}
+
+main .left , 
+main .right {
+  height: 100%;
+  flex-basis: 50%;
+  border-radius: 20px;
+}
+
+main .left {
+  background-color: rgb(66, 67, 62);
+  position: relative;
+  padding: 1rem 4rem;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+main .right {
+  background-color: rgb(70, 65, 74);
+  padding: 1rem 4rem;
+  font-size: 1.2rem;
+  font-weight:900;
+  overflow: auto;
+  margin-bottom: 160px;
+}
+
+left .code,
+.code pre,
+.code pre code{
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  border-radius: 20px;
+  border-radius: 0.7rem;
+}
+
+main .left .review {
+  position: sticky;
+  bottom: 1rem;
+  right: 1rem;
+  align-self: flex-end;
+  margin-top: auto;
+  background-color: rgb(74, 207, 17);
+  color: rgb(253, 253, 253);
+  padding: 0.5rem 2rem;
+  font-weight: 500;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 0.7rem;
+  z-index: 100;
+  font-size: x-large;
+  font-weight: 900;
+}
+
+main .left .review:hover {
+  background-color: green;
+}
