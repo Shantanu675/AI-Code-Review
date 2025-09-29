@@ -9,8 +9,11 @@ import remarkGfm from 'remark-gfm';
 import axios from "axios"
 import './App.css'
 
+const apiUrl = import.meta.env.VITE_API_URL; // Vite
+
 function App() {
   const [count, setCount] = useState(0)
+  const [isLoading, setIsLoading] = useState(false);
   const [code, setCode] = useState(`
 
 `)
@@ -22,15 +25,19 @@ function App() {
 
   async function review_code() {
     try {
-      const response = await axios.post('https://ai-code-review-yvup.onrender.com/ai/get-review',{code})
+      setIsLoading(true);
+      setReview('');
+      const response = await axios.post(apiUrl, { code })
       console.log(response.data);
       setReview(response.data);
     } catch (error) {
       console.error("Error occurred while getting review:", error);
       alert("Something went wrong. Please try again later.");
+    } finally {
+      setIsLoading(false);
     }
   }
-
+  
   return (
     <>
       <main>
@@ -50,32 +57,41 @@ function App() {
               }}
             />
           </div>
-          <button 
+          <button
             onClick={review_code}
             className="review"
+            disabled={isLoading}
           >
-            Review
+            {isLoading ? 'Loading...' : 'Review'}
           </button>
         </div>
         <div className='right' style={{
-              wordSpacing: "1rem",
-              lineHeightStep: "1rem",
-            }}>
-          <Markdown
-            rehypePlugins={[rehypeHighlight]}
-            remarkPlugins={[remarkGfm]}
-            components={{
-              code({ node, inline, className, children, ...props }) {
-                return (
-                  <code className={className} {...props}>
-                    {children}
-                  </code>
-                );
-              }
-            }}
-          >
-          {review}
-          </Markdown>
+          wordSpacing: "1rem",
+          lineHeightStep: "1rem",
+        }}>
+          {isLoading ? (
+            <div className="loading-container">
+              <div className="bouncing-ball"></div>
+              <div className="bouncing-ball"></div>
+              <div className="bouncing-ball"></div>
+            </div>
+          ) : (
+            <Markdown
+              rehypePlugins={[rehypeHighlight]}
+              remarkPlugins={[remarkGfm]}
+              components={{
+                code({ node, inline, className, children, ...props }) {
+                  return (
+                    <code className={className} {...props}>
+                      {children}
+                    </code>
+                  );
+                }
+              }}
+            >
+              {review}
+            </Markdown>
+          )}
         </div>
       </main>
     </>

@@ -105,3 +105,43 @@ main .left .review:hover {
     font-weight: 500;
   }
 }
+
+main .left .review:disabled {
+  background-color: rgb(100, 100, 100);
+  cursor: not-allowed;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  gap: 10px;
+}
+
+.bouncing-ball {
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  background-color: rgb(74, 207, 17);
+  border-radius: 50%;
+  animation: bounce 0.6s infinite alternate;
+}
+
+.bouncing-ball:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.bouncing-ball:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(-30px);
+  }
+}
