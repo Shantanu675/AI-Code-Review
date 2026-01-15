@@ -137,12 +137,27 @@ function App() {
     prism.highlightAll();
   }, [code, review]);
 
+<<<<<<< HEAD
   const review_code = async () => {
     if (requestInProgress) return; // 🔒 HARD LOCK
   
     if (!code.trim()) {
       alert("Please enter some code to review.");
       return;
+=======
+  useEffect(() =>{
+    prism.highlightAll()
+  },[code, review])
+
+  async function review_code() {
+    try {
+      const response = await axios.post('https://vercel.com/shantanu675s-projects/ai-code-review/8waCxzPpHGjFDCLUY6faKVvk4p5Y',{code})
+      console.log(response.data);
+      setReview(response.data);
+    } catch (error) {
+      console.error("Error occurred while getting review:", error);
+      alert("Something went wrong. Please try again later.");
+>>>>>>> 031b30cc2ee4e377708d9613316a16ea727eaec4
     }
   
     requestInProgress = true;
