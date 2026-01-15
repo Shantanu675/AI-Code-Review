@@ -150,8 +150,10 @@ function App() {
     try {
       setIsLoading(true);
       setReview("");
-  
-      const res = await api.post("/get-review", { code });
+      const res1 = await api.get("/", { code });
+      console.log(res1);
+      
+      const res = await api.post("/ai/get-review", { code });
       setReview(res.data);
     } catch (error) {
       if (error.response?.status === 429) {

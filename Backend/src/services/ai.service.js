@@ -48,8 +48,8 @@ const model = genAI.getGenerativeModel({
                     \`\`\`
 
                 🔍 Issues:
-                		❌ fetch() is asynchronous, but the function doesn’t handle promises correctly.
-                		❌ Missing error handling for failed API calls.
+                	•	❌ fetch() is asynchronous, but the function doesn’t handle promises correctly.
+                	•	❌ Missing error handling for failed API calls.
 
                 ✅ Recommended Fix:
 
@@ -67,9 +67,9 @@ const model = genAI.getGenerativeModel({
                    \`\`\`
 
                 💡 Improvements:
-                		✔ Handles async correctly using async/await.
-                		✔ Error handling added to manage failed requests.
-                		✔ Returns null instead of breaking execution.
+                	•	✔ Handles async correctly using async/await.
+                	•	✔ Error handling added to manage failed requests.
+                	•	✔ Returns null instead of breaking execution.
 
                 Final Note:
 
@@ -79,20 +79,14 @@ const model = genAI.getGenerativeModel({
     `
 });
 
-const sleep = (ms) => new Promise(res => setTimeout(res, ms));
 
-async function generateContent(prompt, retry = 1) {
-  try {
+async function generateContent(prompt) {
     const result = await model.generateContent(prompt);
+
+    console.log(result.response.text())
+
     return result.response.text();
-  } catch (err) {
-    if (err.status === 429 && retry > 0) {
-      console.log("⏳ Gemini rate limited. Retrying...");
-      await sleep(3000);
-      return generateContent(prompt, retry - 1);
-    }
-    throw err;
-  }
+
 }
 
-module.exports = generateContent;   
+module.exports = generateContent    
