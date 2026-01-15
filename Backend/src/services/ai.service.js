@@ -79,14 +79,20 @@ const model = genAI.getGenerativeModel({
     `
 });
 
+const sleep = (ms) => new Promise(res => setTimeout(res, ms));
 
-async function generateContent(prompt) {
+async function generateContent(prompt, retry = 1) {
+  try {
     const result = await model.generateContent(prompt);
-
-    console.log(result.response.text())
-
     return result.response.text();
-
+  } catch (err) {
+    if (err.status === 429 && retry > 0) {
+      console.log("⏳ Gemini rate limited. Retrying...");
+      await sleep(3000);
+      return generateContent(prompt, retry - 1);
+    }
+    throw err;
+  }
 }
 
-module.exports = generateContent    
+module.exports = generateContent;   
